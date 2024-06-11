@@ -1,0 +1,11 @@
+.footer {
+  font-family: "Inter", Arial, sans-serif;
+}
+
+.footer__title {
+  margin: 67px auto 60px 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #545454;
+}
