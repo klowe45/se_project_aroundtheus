@@ -205,9 +205,10 @@
     width: 282px;
   }
 
-  .prodile__description {
+  .profile__description {
     width: 100%;
     text-align: center;
+    font-size: 14px;
   }
 
   .profile__add-button {
