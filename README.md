@@ -22,6 +22,10 @@ In the near future, there are plans to add more layouts for different screen res
 
 https://github.com/klowe45/se_project_aroundtheus.git
 
+## Project Link
+
+https://klowe45.github.io/se_project_aroundtheus/
+
 ## Video Link
 
 https://drive.google.com/file/d/1g-QBpwifCZupxu4SJ4lBYNES-JtIW5i9/view?usp=drive_link
