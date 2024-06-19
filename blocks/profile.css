@@ -63,7 +63,6 @@
   grid-area: title;
   margin: 0;
   max-width: 373px;
-  max-height: 48px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -94,11 +93,8 @@
     line-height: 35px;
   }
 
-  .prodile__description {
+  .profile__description {
     width: 100%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
   }
 }
 
@@ -122,12 +118,10 @@
     flex-wrap: wrap;
     width: 100%;
     margin-top: 30px;
-    width: 280px;
+    max-width: 280px;
   }
 
-  .prodile__description {
-    width: 100%;
-    text-align: center;
+  .profile__description {
     display: flex;
     justify-content: center;
   }
@@ -144,53 +138,7 @@
   .profile__title {
     font-size: 22px;
     line-height: 27px;
-    width: 229px;
-  }
-
-  .profile__logo {
-    margin: 28px 167px 0 27px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .profile {
-    flex-direction: column;
-  }
-
-  .profile__header {
-    margin-top: 28px;
-    padding-left: 27px;
-  }
-
-  .profile__info {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-    margin-top: 30px;
-    width: 282px;
-  }
-
-  .prodile__description {
-    width: 100%;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-  }
-
-  .profile__add-button {
-    margin: 36px 0 0 0;
-    width: 282px;
-  }
-
-  .profile__adit-button {
-    margin: 7px auto 0;
-  }
-
-  .profile__title {
-    font-size: 22px;
-    line-height: 1.2;
-    width: 229px;
+    max-width: 229px;
   }
 
   .profile__logo {
@@ -204,29 +152,15 @@
   }
 
   .profile__info {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
     margin: 0 19px 0 19px;
     font-size: 22px;
     line-height: 1.2;
-    width: 282px;
-    height: 50px;
   }
 
   .profile__description {
     width: 100%;
     height: 14px;
-    text-align: center;
     font-size: 14px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .profile__add-button {
-    margin: 36px 0 0 0;
-    width: 282px;
   }
 
   .profile__edit-button {
@@ -236,8 +170,6 @@
   }
 
   .profile__title {
-    font-size: 22px;
-    line-height: 1.2;
-    width: 196px;
+    max-width: 196px;
   }
 }
