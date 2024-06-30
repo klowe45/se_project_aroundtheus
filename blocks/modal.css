@@ -63,13 +63,13 @@
   width: 100%;
 }
 
-.form__fieldset {
+.modal__fieldset {
   border: none;
   padding: 0;
   width: 100%;
 }
 
-.form__input {
+.modal__input {
   width: 100%;
   border: none;
   border-bottom: 1px solid #000000;
@@ -83,7 +83,7 @@
   padding-bottom: 13.26px;
 }
 
-.form__input-description {
+.modal__input-description {
   width: 100%;
   border: none;
   border-bottom: 1px solid #000000;
@@ -96,7 +96,7 @@
   padding-bottom: 13.26px;
 }
 
-.form__button {
+.modal__button {
   background-color: #000000;
   color: #ffffff;
   margin: 48px 0 36.51px 0;
@@ -131,18 +131,18 @@
     line-height: 21.78px;
   }
 
-  .form__input {
+  .modal__input {
     width: 238px;
     margin: 0 22px 30px 22px;
   }
 
-  .form__input-description {
+  .modal__input-description {
     width: 238px;
     margin: 0 22px 45px 22px;
     padding: 0;
   }
 
-  .form__button {
+  .modal__button {
     width: 238px;
     height: 46px;
     margin: 0 22px 25px 22px;
