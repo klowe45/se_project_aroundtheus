@@ -16,10 +16,6 @@
   display: flex;
 }
 
-.modal__opened {
-  display: flex;
-}
-
 .modal__container {
   position: relative;
   padding: 0 36px 0 36px;
