@@ -79,17 +79,8 @@
   padding-bottom: 13.26px;
 }
 
-.modal__input-description {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #000000;
-  display: block;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16.94px;
-  color: #000000;
-  font-family: "Inter", Arial, sans-serif;
-  padding-bottom: 13.26px;
+.modal__input:last-child {
+  margin-bottom: 0;
 }
 
 .modal__button {
@@ -132,15 +123,9 @@
     margin: 0 22px 30px 22px;
   }
 
-  .modal__input-description {
-    width: 238px;
-    margin: 0 22px 45px 22px;
-    padding: 0;
-  }
-
   .modal__button {
     width: 238px;
     height: 46px;
-    margin: 0 22px 25px 22px;
+    margin: 45px 22px 25px 22px;
   }
 }
