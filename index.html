@@ -51,7 +51,7 @@
       <div class="modal__container">
         <button class="modal__close" id="profile-modal-closed"></button>
         <p class="modal__heading">Edit profile</p>
-        <form class="modal__form">
+        <form class="modal__form" id="modal-form-profile">
           <fieldset class="modal__fieldset">
             <input
               class="modal__input"
@@ -68,7 +68,7 @@
               placeholder="Description"
             />
           </fieldset>
-          <button class="modal__button">Save</button>
+          <button class="modal__button" id="modal-save-button">Save</button>
         </form>
       </div>
     </div>
@@ -94,12 +94,25 @@
               placeholder="Image link"
             />
           </fieldset>
-          <button class="modal__button">Save</button>
+          <button class="modal__button">Create</button>
         </form>
       </div>
     </div>
+    <!--image modal preview up-->
+    <div class="modal modal__preview">
+      <div class="modal__container modal__image-container">
+        <button
+          class="modal__close modal__close_preview"
+          id="modal-close-preview"
+        ></button>
+        <img class="modal__image-preview" src="" alt="" />
+        <p class="modal__image-title" id="modal-image-title"></p>
+      </div>
+    </div>
+    <!--end of image modal-->
     <template id="card-template">
       <li class="card">
+        <button class="card__delete-button"></button>
         <img class="card__image" src="" alt="" />
         <div class="card__description">
           <h2 class="card__title"></h2>
