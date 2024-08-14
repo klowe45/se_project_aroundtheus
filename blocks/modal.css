@@ -42,15 +42,10 @@
 }
 
 .modal__container {
-  position: relative;
-  width: 430px;
   background-color: #fff;
-  margin: auto;
   border-radius: 10px;
-  padding: 36px;
-  border: none;
-  box-shadow: none;
-  box-sizing: border-box;
+  color: #000;
+  position: relative;
 }
 
 .modal__image-container {
@@ -86,55 +81,56 @@
 }
 
 .modal__heading {
-  width: 330px;
+  margin: 0;
+  font-family: "Inter", Arial, sans-serif;
   font-weight: 900;
   font-size: 24px;
-  line-height: 29.05px;
-  color: #000000;
-  margin: 34px 0 54px 0;
-  font-family: "Inter", Arial, sans-serif;
+  line-height: 1.2;
+  padding-left: 36px;
+  padding-top: 34px;
 }
 
 .modal__form {
+  max-width: 430px;
+  height: 330px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   flex-wrap: wrap;
-  width: 100%;
-}
-
-.modal__fieldset {
-  border: none;
-  padding: 0;
-  width: 100%;
 }
 
 .modal__input {
-  width: 100%;
+  width: 358px;
+  height: 27px;
+  margin: 0 auto;
   border: none;
-  border-bottom: 1px solid #000000;
-  display: block;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16.94px;
-  color: #000000;
-  margin-bottom: 30px;
+  border-bottom: solid 1px rgb(84 84 84 / 0.2);
+  padding: 0;
   font-family: "Inter", Arial, sans-serif;
-  padding-bottom: 13.26px;
 }
 
-.modal__input:last-child {
-  margin-bottom: 0;
+.modal__label {
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal__button {
   background-color: #000000;
   color: #ffffff;
-  margin: 48px 0 36.51px 0;
+  margin: 0 36px 0 36px;
   height: 50.15px;
   width: 358px;
   font-family: "Inter", Arial, sans-serif;
   padding: 0;
+}
+
+.modal__button_disabled {
+  background: #fff;
+  color: #000;
+  width: 100%;
+  height: 50.152px;
+  border-radius: 2px;
+  margin-top: 48px;
 }
 
 .modal__button:hover {
@@ -146,6 +142,27 @@
   font-size: 14px;
   line-height: 16.94;
   font-family: "Inter", Arial, sans-serif;
+}
+
+.modal__error {
+  color: #ff0000;
+  visibility: hidden;
+  display: block;
+  font-size: 12px;
+  line-height: 12px;
+  height: 12px;
+}
+
+.modal__input_type_error {
+  border-bottom: 1px solid #ff0000;
+}
+
+.modal__error_visible {
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #ff0000;
 }
 
 @media screen and (max-width: 320px) {

@@ -60,10 +60,30 @@ const modalPreviewTitle = modalPreview.querySelector("#modal-image-title");
 //      open/close
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEsc);
+  modal.removeEventListener("mousedown", handleModalClick);
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEsc);
+  modal.addEventListener("mousedown", handleModalClick);
+}
+
+function handleModalClick(evt) {
+  if (
+    evt.currentTarget === evt.target ||
+    evt.target.classList.contains("modal__close")
+  ) {
+    closeModal(evt.currentTarget);
+  }
+}
+
+function handleEsc(evt) {
+  if (evt.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    closeModal(openedModal);
+  }
 }
 
 //      renderCard
