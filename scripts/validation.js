@@ -37,27 +37,27 @@ function hasInvalidInputs(inputList) {
 
 function enableButtton(submitButton, options) {
   const { inactiveButtonClass } = options;
-  submitButton.classList.add(inactiveButtonClass);
+  submitButton.classList.remove(inactiveButtonClass);
   submitButton.disabled = true;
   return;
 }
 
 function disableButton(submitButton, options) {
-  const { inactiveButtonClass } = otions;
-  submitButton.classList.remove(inactiveButtonClass);
+  const { inactiveButtonClass } = options;
+  submitButton.classList.add(inactiveButtonClass);
   submitButton.disabled = false;
   return;
 }
 
-function toogleButtonState(
-  inputElements,
-  submitButton,
-  { inactiveButtonClass }
-) {
+function toogleButtonState(inputElements, submitButton, options) {
+  const { inactiveButtonClass } = options;
   if (hasInvalidInputs(inputElements)) {
-    enableButtton(submitButton);
+    submitButton.classList.add(inactiveButtonClass);
+    submitButton.disabled = true;
+    return;
   } else {
-    disableButton(submitButton);
+    submitButton.classList.remove(inactiveButtonClass);
+    submitButton.disabled = false;
   }
 }
 

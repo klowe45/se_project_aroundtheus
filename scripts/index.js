@@ -110,7 +110,9 @@ function getCardElement(cardData) {
 
   //      Card Delete
   const cardDeleteButton = cardElement.querySelector(".card__delete-button");
-  cardDeleteButton.addEventListener("click", () => {});
+  cardDeleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
 
   //      modal preview
   cardImageEl.addEventListener("click", () => {
@@ -154,12 +156,11 @@ profileModalClosed.addEventListener("click", () =>
 );
 
 profileEditForm.addEventListener("submit", handlersProfileEditSubmit);
+
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
 addNewCardButton.addEventListener("click", () => {
   openModal(addCardModal);
 });
-
-cardModalClosed.addEventListener("click", () => closeModal(addCardModal));
 
 initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));

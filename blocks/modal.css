@@ -78,6 +78,7 @@
   font-weight: 400;
   line-height: 15px;
   font-size: 12px;
+  color: #ffffff;
 }
 
 .modal__heading {
@@ -130,7 +131,7 @@
   width: 100%;
   height: 50.152px;
   border-radius: 2px;
-  margin-top: 48px;
+  margin-top: 0 36px 0 36px;
 }
 
 .modal__button:hover {
@@ -190,21 +191,20 @@
 
   .modal__heading {
     width: 238px;
-    margin: 25px 22px 75px 22px;
+    margin: 50px 22px 35px 22px;
     font-size: 18px;
     line-height: 21.78px;
   }
 
   .modal__input {
     width: 238px;
-    margin: 0 22px 20px 22px;
+    margin: 0 22px 5px 22px;
   }
 
-  /* .modal__button {
+  .modal__label_error_visible {
     width: 238px;
-    height: 46px;
-    margin: 45px 22px 25px 22px;
-  }*/
+    margin: 0 22px 0 22px;
+  }
 
   .modal__button {
     max-width: 238px;
@@ -212,6 +212,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 1.14;
+    margin: 55px 22px 0 22px;
   }
 
   .modal__close {
