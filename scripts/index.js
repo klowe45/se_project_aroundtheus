@@ -32,7 +32,7 @@ const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileModalClosed = document.querySelector("#profile-modal-closed");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
-const profileTitleInput = document.querySelector("#profile-title-input");
+const profileTitleInput = document.querySelector("#profile-name-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );

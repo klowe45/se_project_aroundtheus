@@ -56,22 +56,19 @@
           <label class="modal__label">
             <input
               class="modal__input .modal__input_type_error"
-              id="profile-title-input"
+              id="profile-name-input"
               type="text"
-              name="title"
+              name="name"
               placeholder="Name"
               minlength="2"
               maxlength="40"
               required
             />
-            <span
-              class="modal__label_error_visible"
-              id="profile-title-input-error"
-            ></span>
+            <span class="modal__error" id="profile-name-input-error"></span>
           </label>
           <label class="modal__label">
             <input
-              class="modal__input .modal__input_type_error"
+              class="modal__input modal__input_type_error"
               id="profile-description-input"
               type="text"
               name="description"
@@ -81,7 +78,7 @@
               required
             />
             <span
-              class=".modal__error modal__label_error_visible"
+              class="modal__error"
               id="profile-description-input-error"
             ></span>
           </label>
@@ -96,11 +93,11 @@
       <div class="modal__container">
         <button class="modal__close" id="modal-card-closed"></button>
 
-        <form class="modal__form .modal__input_type_error" id="add-card-form">
+        <form class="modal__form modal__input_type_error" id="add-card-form">
           <p class="modal__heading">New Place</p>
           <label class="modal__label">
             <input
-              class="modal__input"
+              class="modal__input modal__input_type_title"
               id="modal__input_type_title"
               type="tile"
               name="title"
@@ -109,18 +106,18 @@
               maxlength="30"
               required
             />
-            <span class="modal__error modal__label_error_visible" id=""></span>
+            <span class="modal__error" id="profile-title-input-error"></span>
           </label>
           <label class="modal__label">
             <input
-              class="modal__input .modal__input_type_error"
+              class="modal__input modal__input_type_url"
               id="modal__input_type_url"
               type="url"
               name="url"
               placeholder="Image link"
               required
             />
-            <span class=".modal__error modal__label_error_visible" id=""></span>
+            <span class="modal__error" id="profile-url-input-error"></span>
           </label>
 
           <button class="modal__button modal__button_disabled" disabled>

@@ -1,43 +1,31 @@
-function showInputError(
-  formElement,
-  inputElement,
-  { inputErrorClass, errorClass }
-) {
-  const errorMessageElement = formElement.querySelector(
-    `#${inputElement.id}-error`
-  );
-  inputElement.classList.add(inputErrorClass);
-  errorMessageElement.textContent = inputElement.validationMessage;
-  errorMessageElement.classList.add(errorClass);
+function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
+  const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
+  inputEl.classList.add(inputErrorClass);
+  errorMessageEl.textContent = inputEl.validationMessage;
+  errorMessageEl.classList.add(errorClass);
 }
 
-function hideInputError(
-  formElement,
-  inputElement,
-  { inputErrorClass, errorClass }
-) {
-  const errorMessageElement = formElement.querySelector(
-    `#${inputElement.id}-error`
-  );
-  inputElement.classList.remove(inputErrorClass);
-  errorMessageElement.textContent = "";
-  errorMessageElement.classList.remove(errorClass);
+function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
+  const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
+  inputEl.classList.remove(inputErrorClass);
+  errorMessageEl.textContent = "";
+  errorMessageEl.classList.remove(errorClass);
 }
 
-function checkInputValidity(formElement, inputElement, options) {
-  if (!inputElement.validity.valid) {
-    return showInputError(formElement, inputElement, options);
+function checkInputValidity(formEl, inputEl, options) {
+  if (!inputEl.validity.valid) {
+    return showInputError(formEl, inputEl, options);
   }
-  hideInputError(formElement, inputElement, options);
+  hideInputError(formEl, inputEl, options);
 }
 
 function hasInvalidInputs(inputList) {
-  return !inputList.every((inputElement) => inputElement.validity.valid);
+  return !inputList.every((inputEl) => inputEl.validity.valid);
 }
 
-function toogleButtonState(inputElements, submitButton, options) {
+function toogleButtonState(inputEls, submitButton, options) {
   const { inactiveButtonClass } = options;
-  if (hasInvalidInputs(inputElements)) {
+  if (hasInvalidInputs(inputEls)) {
     submitButton.classList.add(inactiveButtonClass);
 
     submitButton.disabled = true;
@@ -48,28 +36,26 @@ function toogleButtonState(inputElements, submitButton, options) {
   }
 }
 
-function setEventListners(formElement, options) {
+function setEventListners(formEl, options) {
   const { inputSelector, submitButtonSelector } = options;
-  const inputElements = Array.from(formElement.querySelectorAll(inputSelector));
-  const submitButton = formElement.querySelector(submitButtonSelector);
-  inputElements.forEach((inputElement) => {
-    inputElement.addEventListener("input", (e) => {
-      checkInputValidity(formElement, inputElement, options);
-      toogleButtonState(inputElements, submitButton, options);
+  const inputEls = Array.from(formEl.querySelectorAll(inputSelector));
+  const submitButton = formEl.querySelector(submitButtonSelector);
+  inputEls.forEach((inputEl) => {
+    inputEl.addEventListener("input", (e) => {
+      checkInputValidity(formEl, inputEl, options);
+      toogleButtonState(inputEls, submitButton, options);
     });
   });
 }
 
 function enableValidation(options) {
-  const formElements = Array.from(
-    document.querySelectorAll(options.formSelector)
-  );
-  formElements.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
+  const formEls = Array.from(document.querySelectorAll(options.formSelector));
+  formEls.forEach((formEl) => {
+    formEl.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
 
-    setEventListners(formElement, options);
+    setEventListners(formEl, options);
   });
 }
 

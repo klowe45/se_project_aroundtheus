@@ -146,27 +146,25 @@
 }
 
 .modal__error {
+  position: absolute;
+  top: 35px;
+  overflow-y: auto;
+}
+
+.modal__error_visible {
   color: #ff0000;
-  visibility: hidden;
-  display: block;
   font-size: 12px;
-  line-height: 12px;
-  height: 12px;
+  width: 100%;
+  border-top: 1px solid #ff0000;
+  top: 30px;
+  padding-top: 7px;
 }
 
 .modal__input_type_error {
-  border-bottom: 1px solid #ff0000;
-}
-
-.modal__label_error_visible {
-  font-family: "Inter", Arial, sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.2;
-  color: #ff0000;
-  width: 358px;
-  height: 27px;
-  margin-top: 5px;
 }
 
 @media screen and (max-width: 320px) {
