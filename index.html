@@ -55,7 +55,7 @@
 
           <label class="modal__label">
             <input
-              class="modal__input .modal__input_type_error"
+              class="modal__input"
               id="profile-name-input"
               type="text"
               name="name"
@@ -68,7 +68,7 @@
           </label>
           <label class="modal__label">
             <input
-              class="modal__input modal__input_type_error"
+              class="modal__input"
               id="profile-description-input"
               type="text"
               name="description"
@@ -93,7 +93,7 @@
       <div class="modal__container">
         <button class="modal__close" id="modal-card-closed"></button>
 
-        <form class="modal__form modal__input_type_error" id="add-card-form">
+        <form class="modal__form" id="add-card-form">
           <p class="modal__heading">New Place</p>
           <label class="modal__label">
             <input
@@ -106,7 +106,10 @@
               maxlength="30"
               required
             />
-            <span class="modal__error" id="profile-title-input-error"></span>
+            <span
+              class="modal__error"
+              id="modal__input_type_title-error"
+            ></span>
           </label>
           <label class="modal__label">
             <input
@@ -117,7 +120,7 @@
               placeholder="Image link"
               required
             />
-            <span class="modal__error" id="profile-url-input-error"></span>
+            <span class="modal__error" id="modal__input_type_url-error"></span>
           </label>
 
           <button class="modal__button modal__button_disabled" disabled>
