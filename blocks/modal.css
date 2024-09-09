@@ -73,7 +73,7 @@
 .modal__image-title {
   display: flex;
   justify-content: flex-start;
-  width: 433px;
+  width: 100%;
   margin: 10px 0 0 0;
   font-weight: 400;
   line-height: 15px;
@@ -184,7 +184,7 @@
   }
 
   .modal__image-container {
-    width: 240px;
+    width: auto;
     height: auto;
   }
 

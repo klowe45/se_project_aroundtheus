@@ -98,7 +98,7 @@ function handleImgClick(card) {
   modalImagePreviewEl.src = card.link;
   modalImagePreviewEl.url = card.name;
   modalPreviewTitle.textContent = card.name;
-  openModal(modalImagePreviewEl);
+  openModal(modalPreview);
 }
 
 //      renderCard
