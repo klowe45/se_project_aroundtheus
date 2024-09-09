@@ -97,7 +97,7 @@ function handleEsc(evt) {
 function handleImgClick(card) {
   modalImagePreviewEl.src = card.link;
   modalImagePreviewEl.url = card.name;
-  modalPreviewTitle.textContent = card.title;
+  modalPreviewTitle.textContent = card.name;
   openModal(modalImagePreviewEl);
 }
 
