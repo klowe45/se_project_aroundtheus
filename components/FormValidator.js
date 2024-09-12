@@ -8,7 +8,6 @@ class FormValidator {
     this._form = formElement;
     this._inputEls = [...this._form.querySelectorAll(this._inputSelector)];
     this._submitButton = this._form.querySelector(this._submitButtonSelector);
-    //this._disableButton = this._disableButton;
   }
 
   _showInputError(inputEl) {
@@ -29,7 +28,7 @@ class FormValidator {
     return !this._inputEls.every((inputEl) => inputEl.validity.valid);
   }
 
-  _toggleButtonState() {
+  toggleButtonState() {
     let foundInvalid = false;
 
     this._inputEls.forEach((inputEl) => {
@@ -67,7 +66,7 @@ class FormValidator {
     this._inputEls.forEach((inputEl) => {
       inputEl.addEventListener("input", (e) => {
         this._checkInputValidity(inputEl);
-        this._toggleButtonState();
+        this.toggleButtonState();
       });
     });
   }
