@@ -8,7 +8,7 @@ class FormValidator {
     this._form = formElement;
     this._inputEls = [...this._form.querySelectorAll(this._inputSelector)];
     this._submitButton = this._form.querySelector(this._submitButtonSelector);
-    this._disableButton = this._disableButton;
+    //this._disableButton = this._disableButton;
   }
 
   _showInputError(inputEl) {
