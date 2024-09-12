@@ -127,6 +127,7 @@ function handleAddCardFormSubmit(e) {
   renderCard({ name, link }, cardsWrap);
   closeModal(addCardModal);
   e.target.reset();
+  addFormValidator._disableButton();
 }
 
 //Event Listeners
