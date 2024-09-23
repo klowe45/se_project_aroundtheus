@@ -8,17 +8,26 @@ import UserInfo from "../components/UserInfo.js";
 import { validationSettings } from "../../utils/constants.js";
 import { initialCards, selectors } from "../../utils/constants.js";
 import "./index.css";
-
-//Elements
-const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileEditForm = profileEditModal.querySelector(".modal__form");
-const addCardForm = addCardModal.querySelector("#add-card-form");
-const addCardButton = document.querySelector("#profile-add-button");
-const profileEditButton = document.querySelector("#profile-edit-button");
-const profileTitleInput = document.querySelector("#profile-name-input");
-const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
-);
+import {
+  modalPreviewTitle,
+  profileModalClosed,
+  profileTitle,
+  profileDescription,
+  cardListEl,
+  cardTemplate,
+  addNewCardButton,
+  cardModalClosed,
+  addCardForm,
+  cardTitleInput,
+  cardUrlInput,
+  cardsWrap,
+  profileEditModal,
+  profileEditForm,
+  addCardButton,
+  profileEditButton,
+  profileTitleInput,
+  profileDescriptionInput,
+} from "../../utils/constants.js";
 
 //validator .................................
 
@@ -84,14 +93,14 @@ const profileEditPopup = new PopupWithForm(
 
 addCardButton.addEventListener("click", () => {
   addFormValidator.toggleButtonState();
-  addCardModal.open();
+  profileEditPopup.open();
 });
 
 profileEditButton.addEventListener("click", () => {
   const formValues = userInfo.getUserInfo();
   profileTitleInput.value = formValues.name;
   profileDescriptionInput.value = formValues.about;
-  editProfileModal.open();
+  profileEditPopup.open();
 });
 
 editFormValidator.enableValidation();
@@ -122,7 +131,7 @@ function handleProfileEditSubmit(formValues) {
     name: formValues.title,
     about: formValues.card__description,
   });
-  editProfileModal.close();
+  profileEditPopup.close();
 }
 
 function handleAddCardFormSubmit(formValues) {
