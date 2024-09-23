@@ -86,7 +86,6 @@ export {
   cardListEl,
   cardTemplate,
   addNewCardButton,
-  addCardModal,
   cardModalClosed,
   addCardForm,
   cardTitleInput,
