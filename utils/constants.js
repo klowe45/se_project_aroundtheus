@@ -41,7 +41,6 @@ const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 const addNewCardButton = document.querySelector("#profile-add-button");
 const cardModalClosed = document.querySelector("#modal-card-closed");
-const addCardForm = addCardModal.querySelector("#add-card-form");
 const cardTitleInput = document.querySelector("#modal__input_type_title");
 const cardUrlInput = document.querySelector("#modal__input_type_url");
 const cardsWrap = document.querySelector(".cards__list");
@@ -53,6 +52,8 @@ const profileTitleInput = document.querySelector("#profile-name-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
+const addCardModal = document.querySelector("#profile-add-modal");
+const addCardForm = addCardModal.querySelector("#add-card-form");
 //Elements
 
 // modal preview El
@@ -67,7 +68,8 @@ export const selectors = {
   cardSection: ".cards__list",
   cardTemplate: "#card-template",
   modalPreview: "#modal-preview",
-  addCardForm: "#add-card-form",
+  //addCardForm: "#add-card-form",
+  addCardModal: "#profile-add-modal",
 };
 
 export const validationSettings = {

@@ -27,6 +27,8 @@ import {
   profileEditButton,
   profileTitleInput,
   profileDescriptionInput,
+  addCardModal,
+  addProfileModal,
 } from "../../utils/constants.js";
 
 //validator .................................
@@ -69,21 +71,21 @@ const userInfo = new UserInfo({
 
 //addCard .................................
 
-const addCardModal = new PopupWithForm(
-  selectors.addCardForm,
-  handleAddCardFormSubmit
-);
-
-addCardModal._setEventListeners();
+const addNewCard = new PopupWithForm({
+  popupSelector: "#add-card-form",
+  handleFormSubmit: handleAddCardFormSubmit,
+});
+addNewCard.setEventListeners();
 
 //addCard .................................
 
 //edit profile .................................
 
-const profileEditPopup = new PopupWithForm(
-  "#profile-add-modal",
-  handleProfileEditSubmit
-);
+const editProfileModal = new PopupWithForm({
+  popupSelector: "#profile-add-modal",
+  handleFormSubmit: handleAddCardFormSubmit,
+});
+editProfileModal.setEventListeners();
 
 //edit profile .................................
 
@@ -117,7 +119,7 @@ addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
 addNewCardButton.addEventListener("click", () => {
   addFormValidator.toggleButtonState();
-  addCardModal.open();
+  editProfileModal.open();
 });
 
 //functions .................................
@@ -142,11 +144,11 @@ function handleAddCardFormSubmit(formValues) {
   const card = createCard({ name, link });
   cardList.addItem(card);
   addCardFormElement.resest();
-  addCardModal.close();
+  editProfileModal.close();
 }
 
 function createCard(data) {
-  const card = new Card(data, "#card=template", handleImageClick);
+  const card = new Card(data, "#card-template", handleImageClick);
   return card.getView();
 }
 
