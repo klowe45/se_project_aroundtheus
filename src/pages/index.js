@@ -72,7 +72,7 @@ const userInfo = new UserInfo({
 //addCard .................................
 
 const addNewCard = new PopupWithForm({
-  popupSelector: "#add-card-form",
+  popupSelector: "#profile-add-modal",
   handleFormSubmit: handleAddCardFormSubmit,
 });
 addNewCard.setEventListeners();
@@ -82,12 +82,21 @@ addNewCard.setEventListeners();
 //edit profile .................................
 
 const editProfileModal = new PopupWithForm({
-  popupSelector: "#profile-add-modal",
-  handleFormSubmit: handleAddCardFormSubmit,
+  popupSelector: "#profile-edit-modal",
+  handleFormSubmit: handleProfileEditSubmit,
 });
 editProfileModal.setEventListeners();
 
 //edit profile .................................
+
+//Popup with image..............................
+
+const imagePopup = new PopupWithImg({
+  popupSelector: ".modal__image-container",
+});
+imagePopup.setEventListeners();
+
+//Popup with image..............................
 
 //Event Handlers .................................
 
@@ -95,32 +104,22 @@ editProfileModal.setEventListeners();
 
 addCardButton.addEventListener("click", () => {
   addFormValidator.toggleButtonState();
-  profileEditPopup.open();
+  addNewCard.open();
 });
 
 profileEditButton.addEventListener("click", () => {
   const formValues = userInfo.getUserInfo();
   profileTitleInput.value = formValues.name;
   profileDescriptionInput.value = formValues.about;
-  profileEditPopup.open();
+  editProfileModal.open();
 });
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
-//popup img .................................
-const imagePopup = new PopupWithImg("#modal-image-preview");
-imagePopup.open(data);
-//popup img .................................
-
 profileEditForm.addEventListener("submit", handlersProfileEditSubmit);
 
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
-
-addNewCardButton.addEventListener("click", () => {
-  addFormValidator.toggleButtonState();
-  editProfileModal.open();
-});
 
 //functions .................................
 
@@ -144,7 +143,7 @@ function handleAddCardFormSubmit(formValues) {
   const card = createCard({ name, link });
   cardList.addItem(card);
   addCardFormElement.resest();
-  editProfileModal.close();
+  addNewCard.close();
 }
 
 function createCard(data) {
