@@ -71,29 +71,27 @@ const userInfo = new UserInfo({
 
 //addCard .................................
 
-const addNewCard = new PopupWithForm({
-  popupSelector: "#profile-add-modal",
-  handleFormSubmit: handleAddCardFormSubmit,
-});
+const addNewCard = new PopupWithForm(
+  "#profile-add-modal",
+  handleAddCardFormSubmit
+);
 addNewCard.setEventListeners();
 
 //addCard .................................
 
 //edit profile .................................
 
-const editProfileModal = new PopupWithForm({
-  popupSelector: "#profile-edit-modal",
-  handleFormSubmit: handleProfileEditSubmit,
-});
+const editProfileModal = new PopupWithForm(
+  "#profile-edit-modal",
+  handleProfileEditSubmit
+);
 editProfileModal.setEventListeners();
 
 //edit profile .................................
 
 //Popup with image..............................
 
-const imagePopup = new PopupWithImg({
-  popupSelector: ".modal__image-container",
-});
+const imagePopup = new PopupWithImg(".modal__image-container");
 imagePopup.setEventListeners();
 
 //Popup with image..............................
