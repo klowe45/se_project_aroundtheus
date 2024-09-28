@@ -92,7 +92,7 @@ editProfileModal.setEventListeners();
 //Popup with image..............................
 
 const imagePopup = new PopupWithImg("#modal-preview");
-imagePopup.setEventSelectors();
+imagePopup.setEventListeners();
 
 //Event Listeners ................................. //Event Handlers ................................. //Popup with image..............................
 
