@@ -91,16 +91,12 @@ editProfileModal.setEventListeners();
 
 //Popup with image..............................
 
-const imagePopup = new PopupWithImg(".modal__image-container");
-imagePopup.setEventListeners();
+const imagePopup = new PopupWithImg("#modal-preview");
+imagePopup.setEventSelectors();
 
-//Popup with image..............................
+//Event Listeners ................................. //Event Handlers ................................. //Popup with image..............................
 
-//Event Handlers .................................
-
-//Event Listeners .................................
-
-addCardButton.addEventListener("click", () => {
+addNewCardButton.addEventListener("click", () => {
   addFormValidator.toggleButtonState();
   addNewCard.open();
 });
@@ -121,8 +117,8 @@ addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
 //functions .................................
 
-function handleImageClick(data) {
-  imagePopup.open(data);
+function handleImageClick(Data) {
+  imagePopup.open(Data);
 }
 
 function handleProfileEditSubmit(formValues) {
