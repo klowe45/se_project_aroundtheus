@@ -15,7 +15,4 @@ export default class Section {
   clear() {
     this._element.innerHTML = "";
   }
-  addItem(element) {
-    this._element.prepend(element);
-  }
 }

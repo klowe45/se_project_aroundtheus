@@ -91,7 +91,7 @@ editProfileModal.setEventListeners();
 
 //Popup with image..............................
 
-const imagePopup = new PopupWithImg("#modal-preview");
+const imagePopup = new PopupWithImg({ popupSelector: "#modal-preview" });
 imagePopup.setEventListeners();
 
 //Event Listeners ................................. //Event Handlers ................................. //Popup with image..............................
@@ -111,9 +111,9 @@ profileEditButton.addEventListener("click", () => {
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
-profileEditForm.addEventListener("submit", handlersProfileEditSubmit);
+//profileEditForm.addEventListener("submit");
 
-addCardForm.addEventListener("submit", handleAddCardFormSubmit);
+//addCardForm.addEventListener("submit");
 
 //functions .................................
 
