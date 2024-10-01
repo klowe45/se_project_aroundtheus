@@ -62,10 +62,7 @@ cardList.renderItems();
 
 //user info .................................
 
-const userInfo = new UserInfo({
-  nameSelector: ".profile__title",
-  descriptionSelector: ".profile__desription",
-});
+const userInfo = new UserInfo(".profile__title", ".profile__desription");
 
 //userinfo .................................
 
@@ -91,7 +88,7 @@ editProfileModal.setEventListeners();
 
 //Popup with image..............................
 
-const imagePopup = new PopupWithImg({ popupSelector: "#modal-preview" });
+const imagePopup = new PopupWithImg("#modal-preview");
 imagePopup.setEventListeners();
 
 //Event Listeners ................................. //Event Handlers ................................. //Popup with image..............................
@@ -130,13 +127,11 @@ function handleProfileEditSubmit(formValues) {
 }
 
 function handleAddCardFormSubmit(formValues) {
-  e.preventDefault();
   const name = formValues.title;
   const link = formValues.url;
 
   const card = createCard({ name, link });
   cardList.addItem(card);
-  addCardFormElement.resest();
   addNewCard.close();
 }
 
