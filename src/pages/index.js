@@ -62,7 +62,7 @@ cardList.renderItems();
 
 //user info .................................
 
-const userInfo = new UserInfo(".profile__title", ".profile__desription");
+const userInfo = new UserInfo(".profile__title", ".profile__description");
 
 //userinfo .................................
 
@@ -100,8 +100,8 @@ addNewCardButton.addEventListener("click", () => {
 
 profileEditButton.addEventListener("click", () => {
   const formValues = userInfo.getUserInfo();
-  profileTitleInput.value = formValues.name;
-  profileDescriptionInput.value = formValues.about;
+  profileTitleInput.value = formValues.title;
+  profileDescriptionInput.value = formValues.description;
   editProfileModal.open();
 });
 
@@ -120,10 +120,10 @@ function handleImageClick(Data) {
 
 function handleProfileEditSubmit(formValues) {
   userInfo.setUsersInfo({
-    name: formValues.title,
-    about: formValues.card__description,
+    name: formValues.name,
+    description: formValues.description,
   });
-  profileEditPopup.close();
+  editProfileModal.close();
 }
 
 function handleAddCardFormSubmit(formValues) {
