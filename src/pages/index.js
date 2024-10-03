@@ -108,10 +108,6 @@ profileEditButton.addEventListener("click", () => {
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
-//profileEditForm.addEventListener("submit");
-
-//addCardForm.addEventListener("submit");
-
 //functions .................................
 
 function handleImageClick(Data) {
