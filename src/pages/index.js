@@ -5,8 +5,8 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImg from "../components/PopupWithImg.js";
 import Section from "../components/sections.js";
 import UserInfo from "../components/UserInfo.js";
-import { validationSettings } from "../../utils/constants.js";
-import { initialCards, selectors } from "../../utils/constants.js";
+import { validationSettings } from "../utils/constants.js";
+import { initialCards, selectors } from "../utils/constants.js";
 import "./index.css";
 import {
   modalPreviewTitle,
@@ -29,7 +29,7 @@ import {
   profileDescriptionInput,
   addCardModal,
   addProfileModal,
-} from "../../utils/constants.js";
+} from "../utils/constants.js";
 
 //validator .................................
 
