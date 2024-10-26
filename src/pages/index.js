@@ -1,3 +1,4 @@
+import Api from "../components/Api.js";
 import FormValidator from "../components/FormValidator.js";
 import Popup from "../components/Popup.js";
 import Card from "../components/Card.js";
@@ -31,7 +32,18 @@ import {
   addProfileModal,
 } from "../utils/constants.js";
 
-//test for new branch
+//API token
+//token: 2404f969-b0fb-4f79-889b-605b6350b491
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "2404f969-b0fb-4f79-889b-605b6350b491",
+    "Content-Type": "application/json",
+  },
+});
+
+//console.log(api);
 
 //validator .................................
 
@@ -64,7 +76,11 @@ cardList.renderItems();
 
 //user info .................................
 
-const userInfo = new UserInfo(".profile__title", ".profile__description");
+const userInfo = new UserInfo(
+  ".profile__title",
+  ".profile__description",
+  ".profile__avatar"
+);
 
 //userinfo .................................
 
@@ -88,12 +104,45 @@ editProfileModal.setEventListeners();
 
 //edit profile .................................
 
+//edit ava
+const profileAvaForm = document.querySelector("#modal-ava-form");
+const profileAvaFormValidator = new FormValidator(
+  validationSettings,
+  profileAvaForm
+);
+profileAvaFormValidator.enableValidation();
+
+const newAvaImgModal = new PopupWithForm("#modal-ava", handleAvaEditSubmit);
+newAvaImgModal.setEventListeners();
+
+function handleAvaEditSubmit(data) {
+  //make a loading function
+
+  api
+    .updateAvatar(data.url)
+    .then((res) => {
+      userInfo.updateAvaImg(res);
+      newAvaImgModal.setEventListeners();
+      profileAvaForm.setEventListeners();
+      //makeloading
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+const AvaImgHover = document.querySelector(".profile__edit-img");
+AvaImgHover.addEventListener("click", () => {
+  newAvaImgModal.open();
+});
+//edit ava
+
 //Popup with image..............................
 
 const imagePopup = new PopupWithImg("#modal-preview");
 imagePopup.setEventListeners();
 
-//Event Listeners ................................. //Event Handlers ................................. //Popup with image..............................
+//Event Listeners .................................
 
 addNewCardButton.addEventListener("click", () => {
   addFormValidator.toggleButtonState();

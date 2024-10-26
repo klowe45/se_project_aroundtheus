@@ -48,6 +48,11 @@
   position: relative;
 }
 
+.modal__container-ava {
+  width: 430px;
+  height: 272px;
+}
+
 .modal__image-container {
   display: flex;
   flex-direction: column;
@@ -96,6 +101,10 @@
   height: 330px;
   display: flex;
   flex-wrap: wrap;
+}
+
+#modal-ava-form {
+  height: 272px;
 }
 
 .modal__input {
@@ -165,6 +174,38 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 1.2;
+}
+
+/*.modal__ava {
+  visibility: visible;
+  opacity: 1;
+}*/
+
+.modal__confirmation-container {
+  max-width: 430px;
+  height: 181px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.confirmation__modal-close {
+  top: -45px;
+}
+
+.confirmation__heading {
+  padding-top: 0;
+  padding-left: 36px;
+  padding-bottom: 38px;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.confirmation__button {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
 }
 
 @media screen and (max-width: 320px) {
