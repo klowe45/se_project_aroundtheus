@@ -119,7 +119,7 @@ function handleAvaEditSubmit(data) {
   //make a loading function
 
   api
-    .updateAvatar(data.url)
+    .updateAvatar(data.link)
     .then((res) => {
       userInfo.updateAvaImg(res);
       newAvaImgModal.setEventListeners();

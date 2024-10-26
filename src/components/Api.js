@@ -50,7 +50,7 @@ export default class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    }).then(_checkResponse);
+    }).then(this._checkResponse);
   }
 
   updateUserInfo({ title, description }) {
@@ -61,15 +61,15 @@ export default class Api {
         name: title,
         about: description,
       }),
-    }).then(_checkResponse);
+    }).then(this._checkResponse);
   }
 
-  updateAvatar(url) {
+  updateAvatar(link) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       headers: { ...this._headers, "Content-Type": "application/json" },
       method: "PATCH",
-      body: JSON.stringify({ avatar: url }),
-    }).then(_checkResponse);
+      body: JSON.stringify({ avatar: link }),
+    }).then(this._checkResponse);
   }
   renderAppData() {
     return Promise.all([this.getUserInfo(), this.getInitialCards()]);
