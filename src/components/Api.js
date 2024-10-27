@@ -6,7 +6,7 @@ export default class Api {
 
   _checkResponse(res) {
     if (res.ok) {
-      return res.josn();
+      return res.json();
     } else {
       return Promise.reject(`Error ${res.status}`);
     }
