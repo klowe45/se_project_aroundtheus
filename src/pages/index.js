@@ -59,7 +59,18 @@ addFormValidator.enableValidation();
 
 //validator .................................
 
-//Sections .................................
+//Sections/Card .................................
+
+function createCard(data) {
+  const card = new Card(
+    data,
+    "#card-template",
+    handleImageClick,
+    handleDeleteCard,
+    handleLikeClick
+  );
+  return card.getView();
+}
 
 const cardList = new Section(
   {
@@ -72,7 +83,32 @@ const cardList = new Section(
   ".cards__list"
 );
 
-cardList.renderItems();
+function renderItems(items) {
+  items.forEach((items) => {
+    this._renderer(items);
+  });
+}
+
+api
+  .getInitialCards()
+  .then((cards) => {
+    cardSection = new Section({
+      items: ititialCards,
+      renderer: (item) => {
+        const card = createCard(item);
+        cardSection.addItem(card);
+      },
+    });
+    cardSection.renderItems();
+  })
+  .catch(console.error);
+
+const res = api.createCard({ name, link });
+cardList.addItem(createCard(res));
+
+addNewCardButton.addEventListener("click", () => {
+  //addCardModal.open();
+});
 
 //user info .................................
 
@@ -180,11 +216,6 @@ function handleAddCardFormSubmit(formValues) {
   const card = createCard({ name, link });
   cardList.addItem(card);
   addNewCard.close();
-}
-
-function createCard(data) {
-  const card = new Card(data, "#card-template", handleImageClick);
-  return card.getView();
 }
 
 //functions ..................................
