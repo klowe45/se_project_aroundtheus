@@ -1,4 +1,5 @@
 import Api from "../components/Api.js";
+import PopupConfirmation from "../components/PopupConfirmation.js";
 import FormValidator from "../components/FormValidator.js";
 import Popup from "../components/Popup.js";
 import Card from "../components/Card.js";
@@ -65,9 +66,9 @@ function createCard(data) {
   const card = new Card(
     data,
     "#card-template",
-    handleImageClick,
+    handleImageAction,
     handleDeleteCard,
-    handleLikeClick
+    handleLikeAction
   );
   return card.getView();
 }
@@ -83,13 +84,17 @@ const cardList = new Section(
   ".cards__list"
 );
 
-function renderItems(items) {
+api.getInitialCards().then((res) => {
+  cardList.renderItems(res);
+});
+
+/*function renderItems(items) {
   items.forEach((items) => {
     this._renderer(items);
   });
-}
+}*/
 
-api
+/*api
   .getInitialCards()
   .then((cards) => {
     cardSection = new Section({
@@ -108,7 +113,23 @@ cardList.addItem(createCard(res));
 
 addNewCardButton.addEventListener("click", () => {
   //addCardModal.open();
-});
+});*/
+
+//confirmation..................................
+
+const deleteCardConfirmation = new PopupConfirmation(
+  "#modal__confirmation",
+  async (cardId, cardELement) => {
+    try {
+      await api.removeCard(cardId);
+      cardELement.removeCard();
+    } catch (err) {
+      console.error(`Error upon Card Delete ${err}`);
+    }
+  }
+);
+
+//confirmation..................................
 
 //user info .................................
 
@@ -192,12 +213,9 @@ profileEditButton.addEventListener("click", () => {
   editProfileModal.open();
 });
 
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
-
 //functions .................................
 
-function handleImageClick(Data) {
+function handleImageAction(Data) {
   imagePopup.open(Data);
 }
 
@@ -216,6 +234,41 @@ function handleAddCardFormSubmit(formValues) {
   const card = createCard({ name, link });
   cardList.addItem(card);
   addNewCard.close();
+}
+
+function handleLikeAction(card) {
+  if (card.setIsLiked) {
+    api
+      .unlikeCard(card._Id)
+      .then(() => {
+        card.setIsLiked();
+      })
+      .catch(console.error);
+  } else {
+    api
+      .likeCard(card._Id)
+      .then(() => {
+        card.setIsLiked();
+      })
+      .catch((err) => {
+        console.err(err);
+      });
+  }
+}
+
+function handleDeleteCard(card) {
+  deleteCardConfirmation.submitHandle(() => {
+    api
+      .removeCard(card.getId())
+      .then(() => {
+        card.removeCard();
+        deleteCardConfirmation.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+  deleteCardConfirmation.open();
 }
 
 //functions ..................................

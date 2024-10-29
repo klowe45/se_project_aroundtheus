@@ -145,7 +145,7 @@
     </div>
     <!--end of image modal-->
     <!--change profile picture-->
-    <div class="modal modal__ava" id="modal-ava">
+    <div class="modal" id="modal-ava">
       <div class="modal__container modal__container-ava">
         <button class="modal__close" id=""></button>
         <form class="modal__form" id="modal-ava-form">
@@ -166,7 +166,7 @@
       </div>
     </div>
     <!--change profile picture-->
-    <!--Delete card modal-->
+    <!--Delete card modal confirmation-->
     <div class="modal modal__confirmation" id="confirmation-delete-modal">
       <div class="modal__container modal__confirmation-container">
         <button
@@ -174,10 +174,16 @@
           id="confirmation-close-button"
         ></button>
         <h3 class="modal__heading confirmation__heading">Are you sure?</h3>
-        <button class="modal__button confirmation__button">Yes</button>
+        <button
+          class="modal__button confirmation__button"
+          id="confirmation-delete"
+        >
+          Yes
+        </button>
       </div>
     </div>
     <!--Delete card modal-->
+
     <template id="card-template">
       <li class="card">
         <button class="card__delete-button"></button>
