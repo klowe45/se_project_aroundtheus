@@ -60,6 +60,29 @@ addFormValidator.enableValidation();
 
 //validator .................................
 
+//Popup with image..............................
+
+const imagePopup = new PopupWithImg("#modal-preview");
+imagePopup.setEventListeners();
+
+//Popup with image..............................
+
+//confirmation..................................
+
+const deleteCardConfirmation = new PopupConfirmation(
+  "#confirmation-delete-modal",
+  async (cardId, cardElement) => {
+    try {
+      await api.removeCard(cardId);
+      cardElement.removeCard();
+    } catch (err) {
+      console.error(`Error upon Card Delete ${err}`);
+    }
+  }
+);
+
+//confirmation..................................
+
 //Sections/Card .................................
 
 function createCard(data) {
@@ -72,6 +95,45 @@ function createCard(data) {
   );
   return card.getView();
 }
+
+function handleDeleteCard(card) {
+  deleteCardConfirmation.submitHandle(() => {
+    api
+      .removeCard(card.getId())
+      .then(() => {
+        card.removeCard();
+        deleteCardConfirmation.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+  deleteCardConfirmation.open();
+}
+
+/*function handleDeleteCard(card, cardId) {
+  if (!cardId) {
+    console.error("card._id is undefined");
+    return;
+  }
+
+  deleteCardConfirmation.submitHandle(() => {
+    api
+      .deleteCard({ cardId })
+      .then(() => {
+        card.handleTrashButton();
+        console.log(`Successfully deleted card with ID: ${cardId}`);
+        deleteCardConfirmation.close();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
+
+  deleteCardConfirmation.open();
+}*/
+
+//////////////////////
 
 const cardList = new Section(
   {
@@ -114,22 +176,6 @@ cardList.addItem(createCard(res));
 addNewCardButton.addEventListener("click", () => {
   //addCardModal.open();
 });*/
-
-//confirmation..................................
-
-const deleteCardConfirmation = new PopupConfirmation(
-  "#modal__confirmation",
-  async (cardId, cardELement) => {
-    try {
-      await api.removeCard(cardId);
-      cardELement.removeCard();
-    } catch (err) {
-      console.error(`Error upon Card Delete ${err}`);
-    }
-  }
-);
-
-//confirmation..................................
 
 //user info .................................
 
@@ -194,11 +240,6 @@ AvaImgHover.addEventListener("click", () => {
 });
 //edit ava
 
-//Popup with image..............................
-
-const imagePopup = new PopupWithImg("#modal-preview");
-imagePopup.setEventListeners();
-
 //Event Listeners .................................
 
 addNewCardButton.addEventListener("click", () => {
@@ -254,21 +295,6 @@ function handleLikeAction(card) {
         console.err(err);
       });
   }
-}
-
-function handleDeleteCard(card) {
-  deleteCardConfirmation.submitHandle(() => {
-    api
-      .removeCard(card.getId())
-      .then(() => {
-        card.removeCard();
-        deleteCardConfirmation.close();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-  deleteCardConfirmation.open();
 }
 
 //functions ..................................

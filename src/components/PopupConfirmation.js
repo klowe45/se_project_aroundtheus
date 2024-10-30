@@ -5,10 +5,10 @@ export default class PopupConfirmation extends Popup {
     super({ popupSelector });
     this._confirmDelete = document.querySelector("#confirmation-delete");
     this._handleConfirmationDelete = handleConfirmationDelete;
-    this._setEventListeners();
+    this.setEventListeners();
   }
 
-  open() {
+  open(cardId, cardElement) {
     super.open();
     this._cardId = cardId;
     this._cardElement = cardElement;
@@ -18,7 +18,7 @@ export default class PopupConfirmation extends Popup {
     this._handleFormSubmit = submit;
   }
 
-  _setEventListeners() {
+  setEventListeners() {
     super.setEventListeners();
     this._confirmDelete.addEventListener("click", () => {
       this._handleFormSubmit();
