@@ -20,7 +20,7 @@ export default class Card {
     this._cardElement
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
-        this.handleLikeAction();
+        this.handleLikeIcon();
       });
 
     this._cardElement
@@ -43,6 +43,12 @@ export default class Card {
 
   getId() {
     return this._id;
+  }
+
+  handleLikeIcon() {
+    this._cardElement
+      .querySelector(".card__like-button")
+      .classList.toggle(".card__like-button_active");
   }
 
   removeCard() {
