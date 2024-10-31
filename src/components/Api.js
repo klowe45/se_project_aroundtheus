@@ -18,7 +18,7 @@ export default class Api {
     }).then(this._checkResponse);
   }
 
-  addCard({ name, link }) {
+  addCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
       method: "POST",
@@ -26,22 +26,22 @@ export default class Api {
     }).then(this._checkResponse);
   }
 
-  removeCard({ cardId }) {
+  removeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       headers: this._headers,
       method: "DELETE",
     }).then(this._checkResponse);
   }
 
-  likeCard({ cardId }) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+  likeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       headers: this._headers,
       method: "PUT",
     }).then(this._checkResponse);
   }
 
-  unlikeCard({ cardId }) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+  unlikeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._checkResponse);

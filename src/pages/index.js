@@ -34,12 +34,12 @@ import {
 } from "../utils/constants.js";
 
 //API token
-//token: 2404f969-b0fb-4f79-889b-605b6350b491
+//token: 5e8d0160-08cb-4cfd-af3f-1e422233210e
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "2404f969-b0fb-4f79-889b-605b6350b491",
+    authorization: "5e8d0160-08cb-4cfd-af3f-1e422233210e",
     "Content-Type": "application/json",
   },
 });
@@ -111,30 +111,6 @@ function handleDeleteCard(card) {
   deleteCardConfirmation.open();
 }
 
-/*function handleDeleteCard(card, cardId) {
-  if (!cardId) {
-    console.error("card._id is undefined");
-    return;
-  }
-
-  deleteCardConfirmation.submitHandle(() => {
-    api
-      .deleteCard({ cardId })
-      .then(() => {
-        card.handleTrashButton();
-        console.log(`Successfully deleted card with ID: ${cardId}`);
-        deleteCardConfirmation.close();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  });
-
-  deleteCardConfirmation.open();
-}*/
-
-//////////////////////
-
 const cardList = new Section(
   {
     items: initialCards,
@@ -146,8 +122,8 @@ const cardList = new Section(
   ".cards__list"
 );
 
-api.getInitialCards().then((res) => {
-  cardList.renderItems(res);
+api.getInitialCards().then((item) => {
+  cardList.renderItems(item);
 });
 
 /*function renderItems(items) {
