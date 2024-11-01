@@ -122,36 +122,9 @@ const cardList = new Section(
   ".cards__list"
 );
 
-api.getInitialCards().then((item) => {
-  cardList.renderItems(item);
+api.getInitialCards().then((res) => {
+  cardList.renderItems(res);
 });
-
-/*function renderItems(items) {
-  items.forEach((items) => {
-    this._renderer(items);
-  });
-}*/
-
-/*api
-  .getInitialCards()
-  .then((cards) => {
-    cardSection = new Section({
-      items: ititialCards,
-      renderer: (item) => {
-        const card = createCard(item);
-        cardSection.addItem(card);
-      },
-    });
-    cardSection.renderItems();
-  })
-  .catch(console.error);
-
-const res = api.createCard({ name, link });
-cardList.addItem(createCard(res));
-
-addNewCardButton.addEventListener("click", () => {
-  //addCardModal.open();
-});*/
 
 //user info .................................
 
@@ -268,7 +241,7 @@ function handleLikeAction(card) {
         card.setIsLiked();
       })
       .catch((err) => {
-        console.err(err);
+        console.error(err);
       });
   }
 }
