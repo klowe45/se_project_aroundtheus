@@ -33,7 +33,9 @@ import {
   addProfileModal,
 } from "../utils/constants.js";
 
-//API token
+/**************************************************************************
+ *                               API                                      *
+ **************************************************************************/
 //token: 5e8d0160-08cb-4cfd-af3f-1e422233210e
 
 const api = new Api({
@@ -46,7 +48,9 @@ const api = new Api({
 
 //console.log(api);
 
-//validator .................................
+/**************************************************************************
+ *                               VALIDATION                               *
+ **************************************************************************/
 
 const editFormValidator = new FormValidator(
   validationSettings,
@@ -58,16 +62,16 @@ const addFormValidator = new FormValidator(validationSettings, addCardForm);
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
-//validator .................................
-
-//Popup with image..............................
+/**************************************************************************
+ *                               Popup with Img                               *
+ **************************************************************************/
 
 const imagePopup = new PopupWithImg("#modal-preview");
 imagePopup.setEventListeners();
 
-//Popup with image..............................
-
-//confirmation..................................
+/**************************************************************************
+ *                               Confirmation                             *
+ **************************************************************************/
 
 const deleteCardConfirmation = new PopupConfirmation(
   "#confirmation-delete-modal",
@@ -81,20 +85,20 @@ const deleteCardConfirmation = new PopupConfirmation(
   }
 );
 
-//confirmation..................................
+/**************************************************************************
+ *                              Render                                    *
+ **************************************************************************/
 
-//Sections/Card .................................
-
-function createCard(data) {
-  const card = new Card(
-    data,
-    "#card-template",
-    handleImageAction,
-    handleDeleteCard,
-    handleLikeAction
-  );
-  return card.getView();
-}
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const cardELement = createCard(item);
+      cardList.addItem(cardELement);
+    },
+  },
+  ".cards__list"
+);
 
 function handleDeleteCard(card) {
   deleteCardConfirmation.submitHandle(() => {
@@ -111,22 +115,57 @@ function handleDeleteCard(card) {
   deleteCardConfirmation.open();
 }
 
-const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      const cardELement = createCard(item);
-      cardList.addItem(cardELement);
-    },
-  },
-  ".cards__list"
-);
+function handleAddCardFormSubmit(formValues) {
+  const name = formValues.title;
+  const link = formValues.link;
 
-api.getInitialCards().then((res) => {
-  cardList.renderItems(res);
-});
+  api
+    .addCard({ name, link })
+    .then((cardData) => {
+      const card = createCard(cardData);
 
-//user info .................................
+      cardList.addItem(card);
+      addNewCard.close();
+      addCardForm.reset();
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+
+    .finally(() => {
+      console.log("Post success.");
+    });
+
+  function createCard(data) {
+    const card = new Card(
+      data,
+      "#card-template",
+      handleImageAction,
+      handleDeleteCard,
+      handleLikeAction
+    );
+    return card.getView();
+  }
+
+  api
+    .getInitialCards()
+    .then((res) => {
+      console.log(res);
+      cardList.renderItems(res);
+    })
+
+    .catch((err) => alert(err));
+}
+
+/*const card = createCard({ name, link });
+  cardList.addItem(card);
+  addNewCard.close();*/
+
+//working on rendering the cards. check addCard func////////////
+
+/**************************************************************************
+ *                               User Info                                *
+ **************************************************************************/
 
 const userInfo = new UserInfo(
   ".profile__title",
@@ -134,19 +173,18 @@ const userInfo = new UserInfo(
   ".profile__avatar"
 );
 
-//userinfo .................................
-
-//addCard .................................
-
+/**************************************************************************
+ *                               addNewCard                               *
+ **************************************************************************/
 const addNewCard = new PopupWithForm(
   "#profile-add-modal",
   handleAddCardFormSubmit
 );
 addNewCard.setEventListeners();
 
-//addCard .................................
-
-//edit profile .................................
+/**************************************************************************
+ *                               Edit Profile                             *
+ **************************************************************************/
 
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
@@ -154,9 +192,9 @@ const editProfileModal = new PopupWithForm(
 );
 editProfileModal.setEventListeners();
 
-//edit profile .................................
-
-//edit ava
+/**************************************************************************
+ *                               Edit Avatar                              *
+ **************************************************************************/
 const profileAvaForm = document.querySelector("#modal-ava-form");
 const profileAvaFormValidator = new FormValidator(
   validationSettings,
@@ -187,9 +225,10 @@ const AvaImgHover = document.querySelector(".profile__edit-img");
 AvaImgHover.addEventListener("click", () => {
   newAvaImgModal.open();
 });
-//edit ava
 
-//Event Listeners .................................
+/**************************************************************************
+ *                               Event Listener                           *
+ **************************************************************************/
 
 addNewCardButton.addEventListener("click", () => {
   addFormValidator.toggleButtonState();
@@ -203,8 +242,9 @@ profileEditButton.addEventListener("click", () => {
   editProfileModal.open();
 });
 
-//functions .................................
-
+/**************************************************************************
+ *                              Functions                                 *
+ **************************************************************************/
 function handleImageAction(Data) {
   imagePopup.open(Data);
 }
@@ -217,14 +257,14 @@ function handleProfileEditSubmit(formValues) {
   editProfileModal.close();
 }
 
-function handleAddCardFormSubmit(formValues) {
+/*function handleAddCardFormSubmit(formValues) {
   const name = formValues.title;
   const link = formValues.url;
 
   const card = createCard({ name, link });
   cardList.addItem(card);
   addNewCard.close();
-}
+}*/
 
 function handleLikeAction(card) {
   if (card.setIsLiked) {
@@ -245,5 +285,3 @@ function handleLikeAction(card) {
       });
   }
 }
-
-//functions ..................................

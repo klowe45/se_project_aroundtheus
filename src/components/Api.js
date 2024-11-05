@@ -18,18 +18,18 @@ export default class Api {
     }).then(this._checkResponse);
   }
 
-  addCard(name, link) {
+  addCard({ name, link }) {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
       method: "POST",
+      headers: this._headers,
       body: JSON.stringify({ name, link }),
     }).then(this._checkResponse);
   }
 
   removeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
-      headers: this._headers,
       method: "DELETE",
+      headers: this._headers,
     }).then(this._checkResponse);
   }
 
