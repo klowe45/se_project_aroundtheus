@@ -100,6 +100,8 @@ const cardList = new Section(
   ".cards__list"
 );
 
+//console.log(cardList);
+
 function handleDeleteCard(card) {
   deleteCardConfirmation.submitHandle(() => {
     api
@@ -117,7 +119,7 @@ function handleDeleteCard(card) {
 
 function handleAddCardFormSubmit(formValues) {
   const name = formValues.title;
-  const link = formValues.link;
+  const link = formValues.url;
 
   api
     .addCard({ name, link })
@@ -135,33 +137,27 @@ function handleAddCardFormSubmit(formValues) {
     .finally(() => {
       console.log("Post success.");
     });
-
-  function createCard(data) {
-    const card = new Card(
-      data,
-      "#card-template",
-      handleImageAction,
-      handleDeleteCard,
-      handleLikeAction
-    );
-    return card.getView();
-  }
-
-  api
-    .getInitialCards()
-    .then((res) => {
-      console.log(res);
-      cardList.renderItems(res);
-    })
-
-    .catch((err) => alert(err));
 }
 
-/*const card = createCard({ name, link });
-  cardList.addItem(card);
-  addNewCard.close();*/
+function createCard(data) {
+  const card = new Card(
+    data,
+    "#card-template",
+    handleImageAction,
+    handleDeleteCard,
+    handleLikeAction
+  );
+  return card.getView();
+}
 
-//working on rendering the cards. check addCard func////////////
+api
+  .getInitialCards()
+  .then((res) => {
+    console.log(res);
+    cardList.renderItems(res);
+  })
+
+  .catch((err) => alert(err));
 
 /**************************************************************************
  *                               User Info                                *
@@ -256,15 +252,6 @@ function handleProfileEditSubmit(formValues) {
   });
   editProfileModal.close();
 }
-
-/*function handleAddCardFormSubmit(formValues) {
-  const name = formValues.title;
-  const link = formValues.url;
-
-  const card = createCard({ name, link });
-  cardList.addItem(card);
-  addNewCard.close();
-}*/
 
 function handleLikeAction(card) {
   if (card.setIsLiked) {
