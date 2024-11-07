@@ -49,7 +49,19 @@ export default class Api {
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
+      method: "GET",
       headers: this._headers,
+    }).then(this._checkResponse);
+  }
+
+  setUserAvatar(link) {
+    console.log("Avatar link:", link);
+
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      "Content-Type": "application/json",
+      body: JSON.stringify({ avatar: link }),
     }).then(this._checkResponse);
   }
 

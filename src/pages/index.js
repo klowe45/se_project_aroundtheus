@@ -36,12 +36,12 @@ import {
 /**************************************************************************
  *                               API                                      *
  **************************************************************************/
-//token: 5e8d0160-08cb-4cfd-af3f-1e422233210e
+//token: f4f8a497-25b7-4571-a952-d6bcf9aed847
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "5e8d0160-08cb-4cfd-af3f-1e422233210e",
+    authorization: "f4f8a497-25b7-4571-a952-d6bcf9aed847",
     "Content-Type": "application/json",
   },
 });
@@ -91,7 +91,6 @@ const deleteCardConfirmation = new PopupConfirmation(
 
 const cardList = new Section(
   {
-    items: initialCards,
     renderer: (item) => {
       const cardELement = createCard(item);
       cardList.addItem(cardELement);
@@ -145,7 +144,8 @@ function createCard(data) {
     "#card-template",
     handleImageAction,
     handleDeleteCard,
-    handleLikeAction
+    likeCard,
+    unlikeCard
   );
   return card.getView();
 }
@@ -158,6 +158,39 @@ api
   })
 
   .catch((err) => alert(err));
+
+/**************************************************************************
+ *                               Like                                      *
+ **************************************************************************/
+
+function likeCard(card) {
+  api
+    .likeCard(card._id, card.isLiked)
+    .then((res) => {
+      console.log(res);
+      card.setIsliked(res.isLiked);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      console.log("Card Liked");
+    });
+}
+/**************************************************************************
+ *                               Unlike                                    *
+ **************************************************************************/
+
+function unlikeCard(card) {
+  api
+    .unlikeCard(card._id)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
 
 /**************************************************************************
  *                               User Info                                *
@@ -205,7 +238,7 @@ function handleAvaEditSubmit(data) {
   //make a loading function
 
   api
-    .updateAvatar(data.url)
+    .setUserAvatar(data.link)
     .then((res) => {
       userInfo.updateAvaImg(res);
       newAvaImgModal.setEventListeners();
@@ -214,6 +247,9 @@ function handleAvaEditSubmit(data) {
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      console.log("Avatar updated");
     });
 }
 
@@ -251,24 +287,4 @@ function handleProfileEditSubmit(formValues) {
     description: formValues.description,
   });
   editProfileModal.close();
-}
-
-function handleLikeAction(card) {
-  if (card.setIsLiked) {
-    api
-      .unlikeCard(card._Id)
-      .then(() => {
-        card.setIsLiked();
-      })
-      .catch(console.error);
-  } else {
-    api
-      .likeCard(card._Id)
-      .then(() => {
-        card.setIsLiked();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
 }
