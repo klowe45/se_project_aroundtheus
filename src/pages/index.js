@@ -165,10 +165,10 @@ api
 
 function likeCard(card) {
   api
-    .likeCard(card._id, card.isLiked)
+    .likeCard(card.id, card.isLiked)
     .then((res) => {
       console.log(res);
-      card.setIsliked(res.isLiked);
+      card.setIsLiked(res.isLiked);
     })
     .catch((err) => {
       console.error(err);
@@ -183,7 +183,7 @@ function likeCard(card) {
 
 function unlikeCard(card) {
   api
-    .unlikeCard(card._id)
+    .unlikeCard(card.id)
     .then((res) => {
       console.log(res);
     })
@@ -214,13 +214,39 @@ addNewCard.setEventListeners();
 /**************************************************************************
  *                               Edit Profile                             *
  **************************************************************************/
-
+/*function handleProfileEditSubmit(formValues) {
+  userInfo.setUsersInfo({
+    name: formValues.name,
+    description: formValues.description,
+  });
+  editProfileModal.close();
+}*/
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
 );
 editProfileModal.setEventListeners();
 
+function handleProfileEditSubmit(formValues) {
+  editProfileModal.setLoading(true);
+  api
+    .setUsersInfo(formValues.title, formValues.description)
+    .then(() => {
+      userInfo.setUsersInfo({
+        name: formValues.title,
+        about: formValues.description,
+      });
+      editProfileModal.close();
+    })
+    .catch((err) => {
+      console.error("Error with updating Info.", err);
+    })
+    .finally(() => {
+      console.log("Profile Updated");
+      editProfileModal.setLoading(false);
+    });
+}
+///continue work on profile submit button/////////
 /**************************************************************************
  *                               Edit Avatar                              *
  **************************************************************************/
@@ -279,12 +305,4 @@ profileEditButton.addEventListener("click", () => {
  **************************************************************************/
 function handleImageAction(Data) {
   imagePopup.open(Data);
-}
-
-function handleProfileEditSubmit(formValues) {
-  userInfo.setUsersInfo({
-    name: formValues.name,
-    description: formValues.description,
-  });
-  editProfileModal.close();
 }

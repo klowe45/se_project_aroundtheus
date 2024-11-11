@@ -8,11 +8,12 @@ export default class UserInfo {
     return {
       title: this._nameElement.textContent,
       description: this._descriptionElement.textContent,
+      ava: this._avaImg.textContent,
     };
   }
-  setUsersInfo({ name, description }) {
+  setUsersInfo({ name, about }) {
     this._nameElement.textContent = name;
-    this._descriptionElement.textContent = description;
+    this._descriptionElement.textContent = about;
   }
   updateAvaImg(img) {
     if (img.ava) {
