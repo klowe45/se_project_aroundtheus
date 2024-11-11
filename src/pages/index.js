@@ -120,6 +120,8 @@ function handleAddCardFormSubmit(formValues) {
   const name = formValues.title;
   const link = formValues.url;
 
+  addNewCard.setLoading(true);
+
   api
     .addCard({ name, link })
     .then((cardData) => {
@@ -135,6 +137,7 @@ function handleAddCardFormSubmit(formValues) {
 
     .finally(() => {
       console.log("Post success.");
+      addNewCard.setLoading(false);
     });
 }
 
@@ -193,16 +196,6 @@ function unlikeCard(card) {
 }
 
 /**************************************************************************
- *                               User Info                                *
- **************************************************************************/
-
-const userInfo = new UserInfo(
-  ".profile__title",
-  ".profile__description",
-  ".profile__avatar"
-);
-
-/**************************************************************************
  *                               addNewCard                               *
  **************************************************************************/
 const addNewCard = new PopupWithForm(
@@ -212,15 +205,27 @@ const addNewCard = new PopupWithForm(
 addNewCard.setEventListeners();
 
 /**************************************************************************
+ *                               User Info                                *
+ **************************************************************************/
+
+const userInfo = new UserInfo(
+  ".profile__title",
+  ".profile__description",
+  ".profile__avatar"
+);
+
+api
+  .getUserInfo()
+  .then((res) => {
+    userInfo.setUsersInfo(res);
+    userInfo.updateAvaImg(res);
+  })
+  .catch((err) => alert(err));
+
+/**************************************************************************
  *                               Edit Profile                             *
  **************************************************************************/
-/*function handleProfileEditSubmit(formValues) {
-  userInfo.setUsersInfo({
-    name: formValues.name,
-    description: formValues.description,
-  });
-  editProfileModal.close();
-}*/
+
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
