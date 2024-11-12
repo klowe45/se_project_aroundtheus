@@ -75,14 +75,6 @@ export default class Api {
       }),
     }).then(this._checkResponse);
   }
-
-  /*updateAvatar(link) {
-    return fetch(`${this._baseUrl}/users/me/avatar`, {
-      headers: { ...this._headers, "Content-Type": "application/json" },
-      method: "PATCH",
-      body: JSON.stringify({ avatar: link }),
-    }).then(this._checkResponse);
-  }*/
   renderAppData() {
     return Promise.all([this.getUserInfo(), this.getInitialCards()]);
   }

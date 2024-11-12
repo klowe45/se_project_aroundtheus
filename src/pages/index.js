@@ -272,11 +272,11 @@ function handleAvaEditSubmit(data) {
   //make a loading function
 
   api
-    .setUserAvatar(data.link)
+    .setUserAvatar(data.url)
     .then((res) => {
       userInfo.updateAvaImg(res);
       newAvaImgModal.setEventListeners();
-      profileAvaForm.setEventListeners();
+
       //newAvaImgModal.setLoading(true);
     })
     .catch((err) => {
