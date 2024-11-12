@@ -235,10 +235,13 @@ editProfileModal.setEventListeners();
 function handleProfileEditSubmit(formValues) {
   editProfileModal.setLoading(true);
   api
-    .setUsersInfo(formValues.title, formValues.description)
+    .updateUserInfo({
+      title: formValues.name,
+      description: formValues.description,
+    })
     .then(() => {
       userInfo.setUsersInfo({
-        name: formValues.title,
+        name: formValues.name,
         about: formValues.description,
       });
       editProfileModal.close();
@@ -251,7 +254,7 @@ function handleProfileEditSubmit(formValues) {
       editProfileModal.setLoading(false);
     });
 }
-///continue work on profile submit button/////////
+
 /**************************************************************************
  *                               Edit Avatar                              *
  **************************************************************************/
@@ -274,13 +277,14 @@ function handleAvaEditSubmit(data) {
       userInfo.updateAvaImg(res);
       newAvaImgModal.setEventListeners();
       profileAvaForm.setEventListeners();
-      //makeloading
+      //newAvaImgModal.setLoading(true);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       console.log("Avatar updated");
+      //newAvaImgModal.setLoading(false);
     });
 }
 
