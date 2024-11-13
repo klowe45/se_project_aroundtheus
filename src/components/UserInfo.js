@@ -16,8 +16,8 @@ export default class UserInfo {
     this._descriptionElement.textContent = about;
   }
   updateAvaImg(img) {
-    if (img.ava) {
-      this._avaImg.src = img.ava;
+    if (img.avatar) {
+      this._avaImg.src = img.avatar;
     }
   }
 }
