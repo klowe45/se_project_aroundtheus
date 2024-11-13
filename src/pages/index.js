@@ -269,22 +269,19 @@ const newAvaImgModal = new PopupWithForm("#modal-ava", handleAvaEditSubmit);
 newAvaImgModal.setEventListeners();
 
 function handleAvaEditSubmit(data) {
-  //make a loading function
-
+  newAvaImgModal.setLoading(true);
   api
     .setUserAvatar(data.url)
     .then((res) => {
       userInfo.updateAvaImg(res);
       newAvaImgModal.setEventListeners();
-
-      //newAvaImgModal.setLoading(true);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       console.log("Avatar updated");
-      //newAvaImgModal.setLoading(false);
+      newAvaImgModal.setLoading(false);
     });
 }
 
