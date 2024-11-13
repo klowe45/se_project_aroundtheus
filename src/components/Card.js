@@ -73,6 +73,7 @@ export default class Card {
     cardImage.alt = this._name;
     cardTitle.textContent = this._name;
     this._setEventListeners();
+    this.setButtonState();
     return this._cardElement;
   }
 }

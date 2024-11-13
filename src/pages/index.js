@@ -312,6 +312,6 @@ profileEditButton.addEventListener("click", () => {
 /**************************************************************************
  *                              Functions                                 *
  **************************************************************************/
-function handleImageAction(Data) {
-  imagePopup.open(Data);
+function handleImageAction(cardData) {
+  imagePopup.open(cardData);
 }
