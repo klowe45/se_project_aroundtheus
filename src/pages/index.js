@@ -147,8 +147,8 @@ function createCard(data) {
     "#card-template",
     handleImageAction,
     handleDeleteCard,
-    likeCard,
-    unlikeCard
+    likeCard
+    //unlikeCard
   );
   return card.getView();
 }
@@ -184,7 +184,7 @@ function likeCard(card) {
  *                               Unlike                                    *
  **************************************************************************/
 
-function unlikeCard(card) {
+/*function unlikeCard(card) {
   api
     .unlikeCard(card.id)
     .then((res) => {
@@ -193,7 +193,7 @@ function unlikeCard(card) {
     .catch((err) => {
       console.error(err);
     });
-}
+}*/
 
 /**************************************************************************
  *                               addNewCard                               *
@@ -274,19 +274,16 @@ function handleAvaEditSubmit(data) {
     .setUserAvatar(data.url)
     .then((res) => {
       userInfo.updateAvaImg(res);
-      newAvaImgModal.setEventListeners();
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch(console.error)
     .finally(() => {
       console.log("Avatar updated");
       newAvaImgModal.setLoading(false);
     });
 }
 
-const AvaImgHover = document.querySelector(".profile__edit-img");
-AvaImgHover.addEventListener("click", () => {
+const avaImgHover = document.querySelector(".profile__edit-img");
+avaImgHover.addEventListener("click", () => {
   newAvaImgModal.open();
 });
 
