@@ -1,6 +1,6 @@
 import Api from "../components/Api.js";
 import PopupConfirmation from "../components/PopupConfirmation.js";
-import FormValidator from "../components/FormValidator.js";
+import FormValidator from "../components/formValidator.js";
 import Popup from "../components/Popup.js";
 import Card from "../components/Card.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -31,6 +31,9 @@ import {
   profileDescriptionInput,
   addCardModal,
   addProfileModal,
+  avatarForm,
+  avatarDeleteButton,
+  profileEditImg,
 } from "../utils/constants.js";
 
 /**************************************************************************
@@ -59,9 +62,11 @@ const editFormValidator = new FormValidator(
 
 const addFormValidator = new FormValidator(validationSettings, addCardForm);
 
+const confirmationValidator = new FormValidator(validationSettings, avatarForm);
+
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
-
+confirmationValidator.enableValidation();
 /**************************************************************************
  *                               Popup with Img                               *
  **************************************************************************/
@@ -274,6 +279,8 @@ function handleAvaEditSubmit(data) {
     .setUserAvatar(data.url)
     .then((res) => {
       userInfo.updateAvaImg(res);
+      newAvaImgModal.close();
+      profileAvaForm.reset();
     })
     .catch(console.error)
     .finally(() => {
@@ -284,6 +291,7 @@ function handleAvaEditSubmit(data) {
 
 const avaImgHover = document.querySelector(".profile__edit-img");
 avaImgHover.addEventListener("click", () => {
+  confirmationValidator.toggleButtonState();
   newAvaImgModal.open();
 });
 
@@ -302,6 +310,10 @@ profileEditButton.addEventListener("click", () => {
   profileDescriptionInput.value = formValues.description;
   editProfileModal.open();
 });
+
+/*avatarDeleteButton.addEventListener("click", () => {
+  confirmationValidator.toggleButtonState();
+});*/
 
 /**************************************************************************
  *                              Functions                                 *
