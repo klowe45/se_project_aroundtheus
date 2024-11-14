@@ -33,16 +33,16 @@ export default class Api {
     }).then(this._checkResponse);
   }
 
-  /*likeCard(cardId, isLiked) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: "PUT",
-      headers: this._headers,
-    }).then(this._checkResponse);
-  }*/
-
   likeCard(cardId, isLiked) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: isLiked ? "DELETE" : "PUT",
+      headers: this._headers,
+    }).then(this._checkResponse);
+  }
+
+  unlikeCard(cardId, unliked) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: unliked ? "DELETE" : "PUT",
       headers: this._headers,
     }).then(this._checkResponse);
   }

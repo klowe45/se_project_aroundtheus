@@ -147,8 +147,8 @@ function createCard(data) {
     "#card-template",
     handleImageAction,
     handleDeleteCard,
-    likeCard
-    //unlikeCard
+    likeCard,
+    unlikeCard
   );
   return card.getView();
 }
@@ -184,16 +184,16 @@ function likeCard(card) {
  *                               Unlike                                    *
  **************************************************************************/
 
-/*function unlikeCard(card) {
+function unlikeCard(card) {
   api
-    .unlikeCard(card.id)
+    .unlikeCard(card.id, card.unlikeCard)
     .then((res) => {
       console.log(res);
     })
     .catch((err) => {
       console.error(err);
     });
-}*/
+}
 
 /**************************************************************************
  *                               addNewCard                               *

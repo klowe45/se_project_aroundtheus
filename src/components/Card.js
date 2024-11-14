@@ -57,7 +57,7 @@ export default class Card {
   setButtonState() {
     if (this.isLiked) {
       this._likeButton.classList.toggle("card__like-button_active");
-    }
+    } else this._likeButton.classList.remove("card__like-button_active");
   }
 
   getView() {
