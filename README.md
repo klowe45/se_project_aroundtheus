@@ -2,7 +2,7 @@
 
 ## What is this?
 
-This page will allow users to crete and share photos taken in the real world. Furthermore, users will be able to display their content, in an easy to use and adaptive format.
+This page will allow users to create and share photos taken in the real world. Furthermore, users will be able to display their content, in an easy to use and adaptive format.
 
 ## How was this created?
 
@@ -28,4 +28,6 @@ https://klowe45.github.io/se_project_aroundtheus/
 
 ## Video Link
 
-https://drive.google.com/file/d/1g-QBpwifCZupxu4SJ4lBYNES-JtIW5i9/view?usp=drive_link
+Video of myself describing the functionality of this project.
+
+https://youtu.be/Z5xgDECrsso
