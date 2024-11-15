@@ -18,11 +18,14 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            class="profile__avatar"
-            src="<%=require('./images/jacques-cousteau-min.jpg')%>"
-            alt="Profile Avatar"
-          />
+          <div class="profile__img-container">
+            <img
+              class="profile__avatar"
+              src="<%=require('./images/jacques-cousteau-min.jpg')%>"
+              alt="Profile Avatar"
+            />
+            <button class="profile__edit-img"></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button
@@ -141,6 +144,46 @@
       </div>
     </div>
     <!--end of image modal-->
+    <!--change profile picture-->
+    <div class="modal" id="modal-ava">
+      <div class="modal__container modal__container-ava">
+        <button class="modal__close" id=""></button>
+        <form class="modal__form" id="modal-ava-form">
+          <p class="modal__heading">Change profile picture</p>
+          <label class="modal__label"
+            ><input
+              class="modal__input modal__input_type_url"
+              type="url"
+              required
+              name="url"
+              id="modal__input_type_url"
+              placeholder="Avatar url"
+            />
+            <span class="modal__error" id="modal__input_type_url-error"></span>
+          </label>
+          <button class="modal__button" type="submit" id="">Save</button>
+        </form>
+      </div>
+    </div>
+    <!--change profile picture-->
+    <!--Delete card modal confirmation-->
+    <div class="modal modal__confirmation" id="confirmation-delete-modal">
+      <div class="modal__container modal__confirmation-container">
+        <button
+          class="modal__close confirmation__modal-close"
+          id="confirmation-close-button"
+        ></button>
+        <h3 class="modal__heading confirmation__heading">Are you sure?</h3>
+        <button
+          class="modal__button confirmation__button"
+          id="confirmation-delete"
+        >
+          Yes
+        </button>
+      </div>
+    </div>
+    <!--Delete card modal-->
+
     <template id="card-template">
       <li class="card">
         <button class="card__delete-button"></button>

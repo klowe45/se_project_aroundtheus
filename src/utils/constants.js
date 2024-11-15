@@ -54,6 +54,9 @@ const profileDescriptionInput = document.querySelector(
 );
 const addCardModal = document.querySelector("#profile-add-modal");
 const addCardForm = addCardModal.querySelector("#add-card-form");
+const avatarForm = document.querySelector("#modal-ava-form");
+const avatarDeleteButton = document.querySelector("#confirmation-delete");
+
 //Elements
 
 // modal preview El
@@ -99,4 +102,6 @@ export {
   profileEditButton,
   profileTitleInput,
   profileDescriptionInput,
+  avatarForm,
+  avatarDeleteButton,
 };

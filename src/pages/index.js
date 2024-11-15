@@ -1,4 +1,6 @@
-import FormValidator from "../components/FormValidator.js";
+import Api from "../components/Api.js";
+import PopupConfirmation from "../components/PopupConfirmation.js";
+import FormValidator from "../components/formValidator.js";
 import Popup from "../components/Popup.js";
 import Card from "../components/Card.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -29,11 +31,29 @@ import {
   profileDescriptionInput,
   addCardModal,
   addProfileModal,
+  avatarForm,
+  avatarDeleteButton,
+  profileEditImg,
 } from "../utils/constants.js";
 
-//test
+/**************************************************************************
+ *                               API                                      *
+ **************************************************************************/
+//token: f4f8a497-25b7-4571-a952-d6bcf9aed847
 
-//validator .................................
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "f4f8a497-25b7-4571-a952-d6bcf9aed847",
+    "Content-Type": "application/json",
+  },
+});
+
+//console.log(api);
+
+/**************************************************************************
+ *                               VALIDATION                               *
+ **************************************************************************/
 
 const editFormValidator = new FormValidator(
   validationSettings,
@@ -42,16 +62,40 @@ const editFormValidator = new FormValidator(
 
 const addFormValidator = new FormValidator(validationSettings, addCardForm);
 
+const confirmationValidator = new FormValidator(validationSettings, avatarForm);
+
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
+confirmationValidator.enableValidation();
+/**************************************************************************
+ *                               Popup with Img                               *
+ **************************************************************************/
 
-//validator .................................
+const imagePopup = new PopupWithImg("#modal-preview");
+imagePopup.setEventListeners();
 
-//Sections .................................
+/**************************************************************************
+ *                               Confirmation                             *
+ **************************************************************************/
+
+const deleteCardConfirmation = new PopupConfirmation(
+  "#confirmation-delete-modal",
+  async (cardId, cardElement) => {
+    try {
+      await api.removeCard(cardId);
+      cardElement.removeCard();
+    } catch (err) {
+      console.error(`Error upon Card Delete ${err}`);
+    }
+  }
+);
+
+/**************************************************************************
+ *                              Render                                    *
+ **************************************************************************/
 
 const cardList = new Section(
   {
-    items: initialCards,
     renderer: (item) => {
       const cardELement = createCard(item);
       cardList.addItem(cardELement);
@@ -60,25 +104,132 @@ const cardList = new Section(
   ".cards__list"
 );
 
-cardList.renderItems();
+//console.log(cardList);
 
-//user info .................................
+function handleDeleteCard(card) {
+  deleteCardConfirmation.submitHandle(() => {
+    api
+      .removeCard(card.getId())
+      .then(() => {
+        card.removeCard();
+        deleteCardConfirmation.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+  deleteCardConfirmation.open();
+}
 
-const userInfo = new UserInfo(".profile__title", ".profile__description");
+function handleAddCardFormSubmit(formValues) {
+  const name = formValues.title;
+  const link = formValues.url;
 
-//userinfo .................................
+  addNewCard.setLoading(true);
 
-//addCard .................................
+  api
+    .addCard({ name, link })
+    .then((cardData) => {
+      const card = createCard(cardData);
 
+      cardList.addItem(card);
+      addNewCard.close();
+      addCardForm.reset();
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+
+    .finally(() => {
+      console.log("Post success.");
+      addNewCard.setLoading(false);
+    });
+}
+
+function createCard(data) {
+  const card = new Card(
+    data,
+    "#card-template",
+    handleImageAction,
+    handleDeleteCard,
+    likeCard,
+    unlikeCard
+  );
+  return card.getView();
+}
+
+api
+  .getInitialCards()
+  .then((res) => {
+    console.log(res);
+    cardList.renderItems(res);
+  })
+
+  .catch((err) => alert(err));
+
+/**************************************************************************
+ *                               Like                                      *
+ **************************************************************************/
+
+function likeCard(card) {
+  api
+    .likeCard(card.id, card.isLiked)
+    .then((res) => {
+      console.log(res);
+      card.setIsLiked(res.isLiked);
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      console.log("Card Liked");
+    });
+}
+/**************************************************************************
+ *                               Unlike                                    *
+ **************************************************************************/
+
+function unlikeCard(card) {
+  api
+    .unlikeCard(card.id, card.unlikeCard)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+/**************************************************************************
+ *                               addNewCard                               *
+ **************************************************************************/
 const addNewCard = new PopupWithForm(
   "#profile-add-modal",
   handleAddCardFormSubmit
 );
 addNewCard.setEventListeners();
 
-//addCard .................................
+/**************************************************************************
+ *                               User Info                                *
+ **************************************************************************/
 
-//edit profile .................................
+const userInfo = new UserInfo(
+  ".profile__title",
+  ".profile__description",
+  ".profile__avatar"
+);
+
+api
+  .getUserInfo()
+  .then((res) => {
+    userInfo.setUsersInfo(res);
+    userInfo.updateAvaImg(res);
+  })
+  .catch((err) => alert(err));
+
+/**************************************************************************
+ *                               Edit Profile                             *
+ **************************************************************************/
 
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
@@ -86,14 +237,67 @@ const editProfileModal = new PopupWithForm(
 );
 editProfileModal.setEventListeners();
 
-//edit profile .................................
+function handleProfileEditSubmit(formValues) {
+  editProfileModal.setLoading(true);
+  api
+    .updateUserInfo({
+      title: formValues.name,
+      description: formValues.description,
+    })
+    .then(() => {
+      userInfo.setUsersInfo({
+        name: formValues.name,
+        about: formValues.description,
+      });
+      editProfileModal.close();
+    })
+    .catch((err) => {
+      console.error("Error with updating Info.", err);
+    })
+    .finally(() => {
+      console.log("Profile Updated");
+      editProfileModal.setLoading(false);
+    });
+}
 
-//Popup with image..............................
+/**************************************************************************
+ *                               Edit Avatar                              *
+ **************************************************************************/
+const profileAvaForm = document.querySelector("#modal-ava-form");
+const profileAvaFormValidator = new FormValidator(
+  validationSettings,
+  profileAvaForm
+);
+profileAvaFormValidator.enableValidation();
 
-const imagePopup = new PopupWithImg("#modal-preview");
-imagePopup.setEventListeners();
+const newAvaImgModal = new PopupWithForm("#modal-ava", handleAvaEditSubmit);
+newAvaImgModal.setEventListeners();
 
-//Event Listeners ................................. //Event Handlers ................................. //Popup with image..............................
+function handleAvaEditSubmit(data) {
+  newAvaImgModal.setLoading(true);
+  api
+    .setUserAvatar(data.url)
+    .then((res) => {
+      userInfo.updateAvaImg(res);
+      newAvaImgModal.close();
+      profileAvaForm.reset();
+    })
+    .catch(console.error)
+    .finally(() => {
+      console.log("Avatar updated");
+      newAvaImgModal.setLoading(false);
+    });
+}
+
+const avaImgHover = document.querySelector(".profile__edit-img");
+avaImgHover.addEventListener("click", () => {
+  confirmationValidator.toggleButtonState();
+  newAvaImgModal.open();
+});
+
+/**************************************************************************
+ *                               Event Listener                           *
+ **************************************************************************/
 
 addNewCardButton.addEventListener("click", () => {
   addFormValidator.toggleButtonState();
@@ -107,35 +311,13 @@ profileEditButton.addEventListener("click", () => {
   editProfileModal.open();
 });
 
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
+/*avatarDeleteButton.addEventListener("click", () => {
+  confirmationValidator.toggleButtonState();
+});*/
 
-//functions .................................
-
-function handleImageClick(Data) {
-  imagePopup.open(Data);
+/**************************************************************************
+ *                              Functions                                 *
+ **************************************************************************/
+function handleImageAction(data) {
+  imagePopup.open(data);
 }
-
-function handleProfileEditSubmit(formValues) {
-  userInfo.setUsersInfo({
-    name: formValues.name,
-    description: formValues.description,
-  });
-  editProfileModal.close();
-}
-
-function handleAddCardFormSubmit(formValues) {
-  const name = formValues.title;
-  const link = formValues.url;
-
-  const card = createCard({ name, link });
-  cardList.addItem(card);
-  addNewCard.close();
-}
-
-function createCard(data) {
-  const card = new Card(data, "#card-template", handleImageClick);
-  return card.getView();
-}
-
-//functions ..................................
